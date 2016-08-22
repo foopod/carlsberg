@@ -8,16 +8,6 @@
         <link rel="stylesheet" href="style.css">
         <link rel="icon" type="image/png" href="favicon.png" />
         <link href="assets/font/css/open-iconic.css" rel="stylesheet">
-		<style>
-			#info {
-				position: absolute;
-				top: 10px;
-				width: 100%;
-				text-align: center;
-				z-index: 100;
-				display:block;
-            }
-		</style>
 	</head>
 	<body> 
         <!-- Google Tag Manager -->
@@ -29,16 +19,12 @@
         '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-PL8VM6');</script>
         <!-- End Google Tag Manager -->
-        <div id="planetViewer" style="height:100%;">
-            <div id="overlay" style="">
-            <h1></h1>
-            
-          </div>
+        <div id="planetViewer" style="height:100%;display:none;position:fixed;">
         
         </div>
         <div id="contentContainer">
             
-            <div id="planetDescriptor">
+            <div id="planetDescriptor" style="background-color:rgba(12,12,12,0.5);">
                 <h1 style="font-size:72px;"><a onclick="swapPlanets(false)" style="float:left;position:absolute;top:1em;left:0.5em" >
                     <span class="oi" data-glyph="caret-left"></span>
                 </a>
@@ -215,6 +201,7 @@
                     } );
                 } else {
                     scene.add(planetList[0]);
+                    $('#planetViewer').show();
                 }
             }
             
@@ -224,6 +211,7 @@
             var output = markdown.toHTML( markdown_source );
             console.log(output);
             $('#planetInfo').html(output);
+            
             init();
             
             // get markdown content  
