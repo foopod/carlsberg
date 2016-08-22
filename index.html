@@ -177,7 +177,14 @@
 
 			function onWindowResize() {
                 console.log(window.innerWidth);
-                if(window.innerWidth>800){
+                if(window.innerWidth<500){
+                    
+                } else if (window.innerWidth<800){
+                    camera.aspect = window.innerWidth / window.innerHeight*2;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize( window.innerWidth, window.innerHeight/2 );
+                    camDistance = 4;
+                }else{
                     camera.aspect = window.innerWidth/2.1 / window.innerHeight*.95;
                     camera.updateProjectionMatrix();
                     renderer.setSize( window.innerWidth/2.1, window.innerHeight*.95 );
