@@ -30,40 +30,21 @@
         })(window,document,'script','dataLayer','GTM-PL8VM6');</script>
         <!-- End Google Tag Manager -->
         <div id="planetViewer" style="height:100%;">
-        <div id="overlay" style="">
-            <h1>
-<!--                <strong>PicoPlanets</strong>-->
-                <a onclick="swapPlanets(false)" style="float:left;padding-left:0.5em;">
-                    <span class="oi" data-glyph="caret-left"></span>
-                </a>
-                <a onclick="swapPlanets(true)" style="float:left;">
-                    <span class="oi" data-glyph="caret-right"></span>
-                </a>
-             
-              
-                
-               </h1>
-<!--            <p style="text-align:center; margin-top:-20px;display:inline">A planetdex for your pocket<p>--> 
+            <div id="overlay" style="">
+            <h1></h1>
             
           </div>
         
-<!--
-            <div style="position: fixed;  top: 53%; left:20px;">
-                <a onclick="swapPlanets(false)">
-                    <h1><span class="oi" data-glyph="caret-left"></span></h1>
-                </a></div>
--->
-
-<!--
-                <a onclick="swapPlanets(true)" style="position:relative;top:50%;">
-                    <h1><span class="oi" data-glyph="caret-right"></span></h1>
-                </a>
--->
         </div>
         <div id="contentContainer">
             
             <div id="planetDescriptor">
-                
+                <h1><a onclick="swapPlanets(false)" style="float:left;position:absolute;top:1em;left:1em" >
+                    <span class="oi" data-glyph="caret-left"></span>
+                </a>
+                <a onclick="swapPlanets(true)" style="float:right;position:absolute;top:1em;right:1em">
+                    <span class="oi" data-glyph="caret-right"></span>
+                    </a></h1>
                 <div id="planetInfo"></div>
                 </div>
         </div>
@@ -177,18 +158,16 @@
 
 			function onWindowResize() {
                 console.log(window.innerWidth);
-                if(window.innerWidth<500){
-                    
-                } else if (window.innerWidth<800){
-                    camera.aspect = window.innerWidth / window.innerHeight*2;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize( window.innerWidth, window.innerHeight/2 );
-                    camDistance = 4;
-                }else{
+                if(window.innerWidth>800){
                     camera.aspect = window.innerWidth/2.1 / window.innerHeight*.95;
                     camera.updateProjectionMatrix();
                     renderer.setSize( window.innerWidth/2.1, window.innerHeight*.95 );
                     camDistance = 8;
+                } else if (window.innerWidth>500){
+                    camera.aspect = window.innerWidth / window.innerHeight*2;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize( window.innerWidth, window.innerHeight/2 );
+                    camDistance = 4;
                 }
 			}
 
