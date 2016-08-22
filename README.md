@@ -14,6 +14,6 @@ Current Version can be viewed [here](http://carlsberg.jono.tech/).
 
 * The diary of an explorer by the name of Carlsberg, read the entries they write for each planets and hear about their experiences as they discover the secrets of the universe. Decipher Carlsberg's entries to find new planets they have visited. The universe is not as big as you think.
 
-#Game Ideas
+#Gameplay Ideas
 
 * Decipher hidden codes that give you coordinates to a new location, enter them to uncover new planets.
