@@ -24,15 +24,33 @@
         </div>
         <div id="contentContainer">
             
-            <div id="planetDescriptor" style="background-color:rgba(0,0,0,0.8);">
-                <h1 style="font-size:72px;"><a onclick="swapPlanets(false)" style="float:left;position:absolute;top:1em;left:0.5em" >
-                    <span class="oi" data-glyph="caret-left"></span>
-                </a>
-                <a onclick="swapPlanets(true)" style="float:right;position:absolute;top:1em;right:0.5em">
-                    <span class="oi" data-glyph="caret-right"></span>
-                    </a></h1>
+            <div id="planetDescriptor" style="background-color:rgba(0,0,0,0.6);">
+                <h1 id="selectors" style="font-size:52px;">
+                    <a onclick="swapPlanets(false)" style="position:absolute;top:0.75em;right:2.5em" >
+                        <span class="oi" data-glyph="caret-left"></span>
+                    </a>
+<!--
+                    <a onclick="showPlanetLoader()" style="position:absolute;top:0.75em;right:1.5em" >
+                        <span class="oi" data-glyph="plus"></span>
+                    </a>
+-->
+                    <a onclick="swapPlanets(true)" style="position:absolute;top:0.75em;right:.5em">
+                        <span class="oi" data-glyph="caret-right"></span>
+                    </a>
+                </h1>
                 <div id="planetInfo"></div>
+                <div id="explorerInterface" style="display:none;">
+                    <h2>Enter System Hash</h2>
+                    <p style="font-weight:100;text-align:center;font-size:70%">Format: <strong><i>SHA(n→∞) </i></strong> <i>eg. s94kg72a8fks91...</i></p>
+                    <form>
+                        <input type="text"/>
+                        <div style="text-align:center;">
+                        <input type=button class="submit positive" value="Submit"/>
+                        <input type=button class="submit negative" value="Cancel" onclick="hidePlanetLoader()"/>
+                        </div>
+                    </form>
                 </div>
+            </div>
         </div>
 
 		<script src="assets/js/three.min.js"></script>
@@ -214,9 +232,17 @@
             
             init();
             
-            // get markdown content  
+            function showPlanetLoader(){
+                $('#planetInfo').hide();
+                $('#selectors').hide();
+                $('#explorerInterface').show();
+            }
             
-
+            function hidePlanetLoader(){
+                $('#explorerInterface').hide();
+                $('#planetInfo').show();
+                $('#selectors').show();
+            }
 		</script>
 	</body>
 </html>
