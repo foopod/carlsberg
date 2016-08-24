@@ -92,7 +92,15 @@ input[type=text],input[type=password], select {
     font-size: 26px;
 }
 
-@media screen and (min-width: 800px){
+@media screen and (min-width: 600px){
+    .submit {
+        display: inline;
+        margin: 8px 5px;
+        width:45%; 
+    }
+}
+
+@media screen and (min-width: 1000px){
     #planetViewer{
         image-rendering: pixelated;
         float:left;
@@ -119,11 +127,5 @@ input[type=text],input[type=password], select {
     
     #overlay {
         width:50%;
-    }
-    
-    .submit {
-        display: inline;
-        margin: 8px 5px;
-        width:45%; 
     }
 }

@@ -21,6 +21,8 @@ var loaded = 0;
 
 var onShip = false;
 
+var maxWidth = 1000;
+
 function planetCycle(upward){
     if(upward){
         planetIndex++;
@@ -87,7 +89,7 @@ function initCanvas() {
 
     container = document.getElementById("planetViewer");
 
-    if(window.innerWidth<800){
+    if(window.innerWidth<maxWidth){
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight*2, 1, 2000 );
         camDistance = 4;
     }else{
@@ -115,7 +117,7 @@ function initCanvas() {
     particleLight.position.z = 129;
     renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio( window.devicePixelRatio/10 );
-    if(window.innerWidth<800){
+    if(window.innerWidth<maxWidth){
         renderer.setSize( window.innerWidth, window.innerHeight/2 );
         camDistance = 4;
     } else {
@@ -131,7 +133,7 @@ function initCanvas() {
 
 function onWindowResize() {
     console.log(window.innerWidth);
-    if(window.innerWidth>800){
+    if(window.innerWidth>maxWidth){
         camera.aspect = window.innerWidth/2.1 / window.innerHeight*.95;
         camera.updateProjectionMatrix();
         renderer.setSize( window.innerWidth/2.1, window.innerHeight*.95 );
