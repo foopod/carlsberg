@@ -26,25 +26,25 @@
             
             <div id="planetDescriptor" style="background-color:rgba(0,0,0,0.6);">
                 <h1 id="selectors" style="font-size:52px;">
-                    <a onclick="swapPlanets(false)" style="position:absolute;top:0.75em;right:2.5em" >
+                    <a onclick="planetCycle(false)" style="position:absolute;top:0.75em;right:2.5em" >
                         <span class="oi" data-glyph="caret-left"></span>
                     </a>
-                    <a onclick="showPlanetLoader()" style="position:absolute;top:0.75em;right:1.5em" >
-                        <span class="oi" data-glyph="plus"></span>
+                    <a onclick="showObject(ship,true)" style="position:absolute;top:0.75em;right:1.5em" >
+                        <span class="oi" data-glyph="dashboard"></span>
                     </a>
-                    <a onclick="swapPlanets(true)" style="position:absolute;top:0.75em;right:.5em">
+                    <a onclick="planetCycle(true)" style="position:absolute;top:0.75em;right:.5em">
                         <span class="oi" data-glyph="caret-right"></span>
                     </a>
                 </h1>
                 <div id="planetInfo"></div>
                 <div id="explorerInterface" style="display:none;">
-                    <h2>Enter System Hash</h2>
+                    <h2>Navigate to System by Hash</h2>
                     <p style="font-weight:100;text-align:center;font-size:70%">Format: <strong><i>SHA(n→∞) </i></strong> <i>eg. s94kg72a8fks91...</i></p>
                     <form>
                         <input type="text"/>
                         <div style="text-align:center;">
                         <input type=button class="submit positive" value="Submit"/>
-                        <input type=button class="submit negative" value="Cancel" onclick="hidePlanetLoader()"/>
+                            <p>Visit new planets by entering their coordinates.</p>
                         </div>
                     </form>
                 </div>
@@ -57,190 +57,6 @@
         <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
         <script src="assets/js/markdown.min.js"></script>
 		<script src="assets/js/Detector.js"></script>
-		<script>
-            
-            
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
-
-			var container, stats;
-
-			var camera, scene, renderer, objects;
-			var particleLight;
-            var number =0;
-            var pathModels = 'assets/models/';
-            var pathContent = 'md/';
-            var planets = ['jupiter', 'canyon', 'planetz', 'earth'];
-            var planetList = [];
-            
-            var started = false;
-            
-            var camDistance = 3;
-            var loaded = 0;
-            
-            function swapPlanets(goingUp){
-                scene.remove(planetList[number]);
-                if(goingUp){
-                    number++;
-                    if(number==planetList.length){
-                        number=0;
-                    }
-                } else {
-                    number--;
-                    if(number==-1){
-                        number=planetList.length-1;
-                    }
-                }
-                
-                var body_location = pathContent+planets[planetList.length-1-number]+'.md';
-                var markdown_source = getText(body_location);
-                // convert markdown to html
-                var output = markdown.toHTML( markdown_source );
-                console.log(output);
-                $('#planetInfo').html(output);
-
-                scene.add(planetList[number]);
-            }
-            
-            function getText(myUrl){
-                var result = null;
-                $.ajax( { url: myUrl, 
-                          type: 'get', 
-                          dataType: 'html',
-                          async: false,
-                          success: function(data) { result = data; } 
-                        }
-                );
-                FileReady = true;
-                return result;
-            }
-
-			function init() {
-
-				container = document.getElementById("planetViewer");
-                
-                if(window.innerWidth<800){
-				    camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight*2, 1, 2000 );
-                    camDistance = 4;
-                }else{
-                    camera = new THREE.PerspectiveCamera( 45, window.innerWidth/2.1 / window.innerHeight*.95, 1, 2000 );
-                    camDistance = 8;
-                }
-				camera.position.set( 2, 2, 3 );
-                
-                scene = new THREE.Scene();
-
-				particleLight = new THREE.Mesh( new THREE.SphereGeometry( 4, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffffff } ) );
-				scene.add( particleLight );
-
-				// Lights
-
-				scene.add( new THREE.AmbientLight( 0x888888 ) );
-
-
-    				var pointLight = new THREE.PointLight( 0xddddff, 2.5 );
-                    pointLight.position.z = 50;
-                pointLight.position.x = -500;
-    				particleLight.add( pointLight );
-
-				renderer = new THREE.WebGLRenderer();
-				renderer.setPixelRatio( window.devicePixelRatio/1 );
-                if(window.innerWidth<800){
-				    renderer.setSize( window.innerWidth, window.innerHeight/2 );
-                    camDistance = 4;
-                } else {
-                    renderer.setSize( window.innerWidth/2.1,window.innerHeight*.95);
-                    camDistance = 8;
-                }
-                renderer.setClearColor(0x222222);
-				container.appendChild( renderer.domElement );
-
-				window.addEventListener( 'resize', onWindowResize, false );
-                loadNext(); 
-			}
-
-			function onWindowResize() {
-                console.log(window.innerWidth);
-                if(window.innerWidth>800){
-                    camera.aspect = window.innerWidth/2.1 / window.innerHeight*.95;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize( window.innerWidth/2.1, window.innerHeight*.95 );
-                    camDistance = 8;
-                } else if (window.innerWidth>500){
-                    camera.aspect = window.innerWidth / window.innerHeight*2;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize( window.innerWidth, window.innerHeight/2 );
-                    camDistance = 4;
-                }
-			}
-
-			
-
-			function animate() {
-                requestAnimationFrame( animate ); 
-				render();
-			}
-
-			var clock = new THREE.Clock();
-
-			function render() {
-
-				var timer = Date.now() * 0.0005;
-
-				camera.position.x = Math.cos( 2 ) * camDistance;
-				camera.position.y = 4;
-				camera.position.z = Math.sin( 2 ) * camDistance;
-
-				camera.lookAt( scene.position );
-                planetList[number].rotation.y=.05* timer;
-                planetList[number].rotation.x=.0000000001* timer;
-				particleLight.position.x = 1;
-				particleLight.position.y = 23;
-				particleLight.position.z = 129;
-
-				renderer.render( scene, camera );
-			}
-            
-            function loadNext(){
-                if(planetList.length < planets.length){
-                    var loader = new THREE.ColladaLoader();
-			        loader.options.convertUpAxis = true;
-                    loader.load( pathModels + planets[planets.length-planetList.length-1] + '.dae', function ( collada ) {
-                        var dae = collada.scene;
-                        dae.scale.x = dae.scale.y = dae.scale.z = 2;
-                        dae.updateMatrix();
-                        planetList.push(dae);
-                        if(!started){
-                            animate();
-                            started = true;
-                        }
-                        loadNext();
-                    } );
-                } else {
-                    scene.add(planetList[0]);
-                    $('#planetViewer').show();
-                }
-            }
-            
-            var body_location = pathContent+planets[planets.length-1]+'.md';
-            var markdown_source = getText(body_location);
-            // convert markdown to html
-            var output = markdown.toHTML( markdown_source );
-            console.log(output);
-            $('#planetInfo').html(output);
-            
-            init();
-            
-            function showPlanetLoader(){
-                $('#planetInfo').hide();
-                $('#selectors').hide();
-                $('#explorerInterface').show();
-            }
-            
-            function hidePlanetLoader(){
-                $('#explorerInterface').hide();
-                $('#planetInfo').show();
-                $('#selectors').show();
-            }
-		</script>
+        <script src="assets/js/app.js"></script>
 	</body>
 </html>

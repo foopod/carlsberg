@@ -5,7 +5,7 @@ html {
 body{
     background-color: #222;
     color: #fff;
-    font-family: sans-serif;
+    font-family: monospace;
     font-size:  20px;
 }
 
@@ -59,7 +59,6 @@ canvas{
     top: 0;
     width: 100%;
     }
-
 
 .submit {
     width: 100%;
