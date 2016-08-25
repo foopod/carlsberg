@@ -1,14 +1,3 @@
-html{
-    overflow: hidden;
-    width:100%;
-}
-
-body{
-    height:100%;
-    overflow-y:scroll;
-    -webkit-overflow-scrolling: touch; /* iOS velocity scrolling */
-}
-
 html {
     overflow-y:scroll;
 }
