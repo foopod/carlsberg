@@ -205,6 +205,7 @@ function loadNext(leftToLoad){
         } );
     } else {
         $('#planetViewer').show();
+        window.scrollTo(0,1);
     }
 }
 
