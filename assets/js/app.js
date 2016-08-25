@@ -40,7 +40,6 @@ function planetCycle(upward){
 }
 
 function toggleResolution(){
-    console.log(renderer.getPixelRatio());
     if(lowRes){
         renderer.setPixelRatio(window.devicePixelRatio/1);
         lowRes = false;
@@ -48,7 +47,6 @@ function toggleResolution(){
         renderer.setPixelRatio(window.devicePixelRatio/10);
         lowRes = true;
     }
-    console.log(renderer.getPixelRatio());
     onWindowResize();
 }
 
@@ -150,7 +148,7 @@ function onWindowResize() {
         camera.updateProjectionMatrix();
         renderer.setSize( window.innerWidth/2.1, window.innerHeight*.95 );
         camDistance = 8;
-    } else if (window.innerWidth>600){
+    } else if (window.innerWidth>500){
         camera.aspect = window.innerWidth / window.innerHeight*2;
         camera.updateProjectionMatrix();
         renderer.setSize( window.innerWidth, window.innerHeight/2 );
@@ -205,7 +203,6 @@ function loadNext(leftToLoad){
         } );
     } else {
         $('#planetViewer').show();
-        window.scrollTo(0,1);
     }
 }
 
@@ -218,5 +215,6 @@ function hidePlanetLoader(){
     $('#explorerInterface').hide();
     $('#explorerInterface').appendTo($('#planetDescriptor'));
 }
+
 
 initCanvas();
