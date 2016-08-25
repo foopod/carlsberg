@@ -19,7 +19,7 @@
         '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-PL8VM6');</script>
         <!-- End Google Tag Manager -->
-        <div id="planetViewer" style="height:100%;display:none;position:fixed;" onclick="toggleResolution()">
+        <div id="planetViewer" style="height:100%;display:none;position:fixed;">
         
         </div>
         <div id="contentContainer">
@@ -29,25 +29,14 @@
                     <a onclick="planetCycle(false)" style="position:absolute;top:0.75em;right:2.5em" >
                         <span class="oi" data-glyph="caret-left"></span>
                     </a>
-                    <a onclick="showObject(ship,true)" style="position:absolute;top:0.75em;right:1.5em" >
-                        <span class="oi" data-glyph="dashboard"></span>
+                    <a id="shipSelector" onclick="showObject(ship,true)" style="position:absolute;top:0.75em;right:1.5em" >
+                        <span class="oi" data-glyph="home"></span>
                     </a>
                     <a onclick="planetCycle(true)" style="position:absolute;top:0.75em;right:.5em">
                         <span class="oi" data-glyph="caret-right"></span>
                     </a>
                 </h1>
                 <div id="planetInfo"></div>
-                <div id="explorerInterface" style="display:none;">
-                    <h2>Navigate to System by Hash</h2>
-                    <p style="font-weight:100;text-align:center;font-size:70%">Format: <strong><i>SHA(n→∞) </i></strong> <i>eg. s94kg72a8fks91...</i></p>
-                    <form>
-                        <input type="text"/>
-                        <div style="text-align:center;">
-                        <input type=button class="submit positive" value="Submit"/>
-                            <p>Visit new planets by entering their coordinates.</p>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
 
