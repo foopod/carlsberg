@@ -96,37 +96,26 @@ canvas{
     border-bottom: 1px dotted black;
 }
 
-.tooltip .tooltiptext {
+#planetDescriptor .tooltiptext {
     visibility: visible;
-    width: 200px;
+    width: 300px;
+    font-size: 26px;
     background-color: dodgerblue;
     color: #fff;
     text-align: center;
     border-radius: 6px;
     padding: 5px 10px;
-
+    border: 2px black solid;
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
 }
 
-.tooltip .tooltiptext::after {
-    content: " ";
-    position: absolute;
-    top: 100%; /* At the bottom of the tooltip */
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: dodgerblue transparent transparent transparent;
-}
-
-
-.tooltip .tooltiptext {
-    width: 200px;
-    bottom: 120%;
+#planetDescriptor .tooltiptext {
+    width: 300px;
+/*    bottom: 0%;*/
     left: 50%; 
-    margin-left: -110px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    margin-left: -160px;  Use half of the width (120/2 = 60), to center the tooltip 
 }
 
 input[type=text],input[type=password], select {

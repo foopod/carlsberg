@@ -80,7 +80,8 @@ function unlockPlanet(code){
     //Show planet tool tip
     $('#planetInfo a').each(function() {
         $(this).addClass("tooltip");
-        $(this).append('<span class="tooltiptext" style="display:none;">New Co-Ordinates Obtained</span>');
+        $(this).parent().append('<span class="tooltiptext" style="display:none;">New Co-Ordinates Obtained</span>');
+        $('.tooltiptext').css('top', $(this).offset().top - $(window).scrollTop());
         $('.tooltiptext').fadeIn();
         $(this).removeAttr("onclick");
         setTimeout(function(){ 
