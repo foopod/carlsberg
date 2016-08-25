@@ -17,6 +17,7 @@ var ship;
 var started = false;
 
 var camDistance = 3;
+var lowRes = false;
 var loaded = 0;
 
 var onShip = false;
@@ -38,6 +39,19 @@ function planetCycle(upward){
     showObject(planetList[planetIndex], false);
 }
 
+function toggleResolution(){
+    console.log(renderer.getPixelRatio());
+    if(lowRes){
+        renderer.setPixelRatio(window.devicePixelRatio/1);
+        lowRes = false;
+    } else {
+        renderer.setPixelRatio(window.devicePixelRatio/10);
+        lowRes = true;
+    }
+    console.log(renderer.getPixelRatio());
+    onWindowResize();
+}
+
 
 function showObject(model, isShip){
     hidePlanetLoader();
@@ -56,7 +70,6 @@ function showObject(model, isShip){
     var markdown_source = getText(body_location);
     // convert markdown to html
     var output = markdown.toHTML( markdown_source );
-    console.log(output);
     $('#planetInfo').html(output);
     
     if(isShip){
@@ -116,7 +129,7 @@ function initCanvas() {
     particleLight.position.y = 23;
     particleLight.position.z = 129;
     renderer = new THREE.WebGLRenderer();
-    renderer.setPixelRatio( window.devicePixelRatio/10 );
+    renderer.setPixelRatio( window.devicePixelRatio/1);
     if(window.innerWidth<maxWidth){
         renderer.setSize( window.innerWidth, window.innerHeight/2 );
         camDistance = 4;
@@ -125,14 +138,13 @@ function initCanvas() {
         camDistance = 8;
     }
     renderer.setClearColor(0x222222);
-    container.appendChild( renderer.domElement );
+    container.appendChild(renderer.domElement);
 
     window.addEventListener( 'resize', onWindowResize, false );
     loadNext(modelList.length); 
 }
 
 function onWindowResize() {
-    console.log(window.innerWidth);
     if(window.innerWidth>maxWidth){
         camera.aspect = window.innerWidth/2.1 / window.innerHeight*.95;
         camera.updateProjectionMatrix();
