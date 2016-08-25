@@ -31,8 +31,6 @@ h4{
 
 #planetInfo{
     height:100%;
-    margin-top:-2em;
-    overflow:auto;
 }
 
 canvas{
@@ -149,6 +147,7 @@ input[type=text],input[type=password], select {
     #planetInfo{
         height: 80%;
         margin-top:20%;
+        overflow:auto;
     }
     
     #contentContainer{

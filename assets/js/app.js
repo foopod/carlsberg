@@ -154,6 +154,22 @@ function showObject(model, isShip){
         scene.add(spaceObjects[planetIndex].model);
         objectInScene = spaceObjects[planetIndex].model;
     }
+    
+    //Setting up two parter
+    if(!onShip && spaceObjects[planetIndex].investigated != true){
+        $('#planetInfo').append('<div id="investigateButton" style="text-align:center"><a class="submit positive" onclick="investigate()">Investigate</a></div>');
+        $('#planetInfo').append('<div id="investigationInfo" style="display:none"></div>');
+
+        $('#planetInfo p').each(function() {
+            $(this).appendTo($('#investigationInfo'));
+        });
+    }
+}
+
+function investigate(){
+    spaceObjects[planetIndex].investigated = true;
+    $('#investigateButton').hide();
+    $('#investigationInfo').show();
 }
 
 //used to retrieve markdown files
