@@ -10,33 +10,32 @@ var pathContent = 'md/';
 
 var spaceObjects = [
     {
-        'name':'ship',
+        'name':'Ship',
         'isShip':true,
         'unlockCode':''
     },
     {
-        'name':'jupiter',
+        'name':'Jupiter',
         'isShip':false,
         'unlockCode':''
     },
     {
-        'name':'canyon',
+        'name':'Canyon',
         'isShip':false,
-        'unlockCode':''
+        'unlockCode':'1b9897de43ca4dea5c105803a85f2fcf'
     },
     {
-        'name':'planetz',
+        'name':'Planetz',
         'isShip':false,
-        'unlockCode':''
+        'unlockCode':'b1c7db83670f1a298a8040079e36dd8f'
     },
     {
-        'name':'earth',
+        'name':'Earth',
         'isShip':false,
         'unlockCode':'852488ddd9570bc877783bf4397563e0'
     }];
 
 var planetIndex =1;
-var planetList = [];
 var objectInScene;
 var ship;
 
@@ -47,6 +46,7 @@ var lowRes = false;
 var loaded = 0;
 
 var onShip = false;
+var recentlyDiscovered = [];
 
 var maxWidth = 1000;
 
@@ -69,59 +69,65 @@ function planetCycle(upward){
         }
     }
     //Skip locked planets and your ship
-    if(spaceObjects[planetIndex].unlockCode != '' || spaceObjects[planetIndex].name == 'ship'){
+    if(spaceObjects[planetIndex].unlockCode != '' || spaceObjects[planetIndex].name.toLowerCase() == 'ship'){
         planetCycle(upward);
     } else {
         showObject(spaceObjects[planetIndex].model, false);
     }
 }
 
-function unlockPlanet(code){
+function unlockPlanet(code, component){
     //Show planet tool tip
-    $('#planetInfo a').each(function() {
-        $(this).addClass("tooltip");
-        $(this).parent().append('<span class="tooltiptext" style="display:none;">New Co-Ordinates Obtained</span>');
-        $('.tooltiptext').css('top', $(this).offset().top - $(window).scrollTop());
+//    $('#investigationInfo a').each(function() {
+        $(component).addClass("tooltip");
+        $(component).parent().append('<span class="tooltiptext" style="display:none;">New Co-Ordinates Obtained</span>');
+//        console.log($(this).position());
+        $('.tooltiptext').css('top', $(component).position().top-50);
         $('.tooltiptext').fadeIn();
-        $(this).removeAttr("onclick");
+        $(component).removeAttr("onclick");
         setTimeout(function(){ 
             $('.tooltiptext').each(function() {
                  $(this).fadeOut();
             });
         }, 1400);
-    });
+//    });
     
     //remove unlock code to unlock
     for(planet in spaceObjects){
         if(spaceObjects[planet].unlockCode == code){
             spaceObjects[planet].unlockCode = '';
+            recentlyDiscovered.push(spaceObjects[planet]);
             return true;
         }
     }
 }
 
+function showSpecificPlanet(object){
+    planetIndex = spaceObjects.indexOf(object);
+    showObject(object.model, object.isShip);
+}
+
 function showObject(model, isShip){
-//    hidePlanetLoader();
-    
     scene.remove(objectInScene);
     
     //Click showShip from ship (ie. unshowing the ship and going back to planet view)
     if(model == objectInScene){
         isShip = false;
-        $('#shipSelector').html('<span class="oi" data-glyph="home"></span>');
     }
     
     //swap icons
     if(isShip){
         $('#shipSelector').html('<span class="oi" data-glyph="globe"></span>');
+    } else {
+        $('#shipSelector').html('<span class="oi" data-glyph="home"></span>');   
     }
     
     //Getting markdown
     var body_location;
     if(isShip){
-        body_location = pathContent+spaceObjects[0].name+'.md';
+        body_location = pathContent+spaceObjects[0].name.toLowerCase()+'.md';
     } else {
-        body_location = pathContent+spaceObjects[planetIndex].name+'.md';
+        body_location = pathContent+spaceObjects[planetIndex].name.toLowerCase()+'.md';
     }
     var markdown_source = getText(body_location);
     // convert markdown to html
@@ -133,7 +139,7 @@ function showObject(model, isShip){
         var name = this.pathname.substr(1);
         for(planet in spaceObjects){
             if(spaceObjects[planet].unlockCode == name){
-                $(this).attr('onclick','unlockPlanet("'+name+'")');
+                $(this).attr('onclick','unlockPlanet("'+name+'", this)');
                 $(this).removeAttr("href");
                 $(this).addClass("code");
             }
@@ -163,6 +169,17 @@ function showObject(model, isShip){
         $('#planetInfo p').each(function() {
             $(this).appendTo($('#investigationInfo'));
         });
+    } else if(onShip && recentlyDiscovered.length>0){
+        $('#planetInfo').append('<p style="text-decoration:underline;">Recently Discovered Planets</p>');
+        for(currentPlanet in recentlyDiscovered){
+            var index = 0;
+            for(planet in spaceObjects){
+                if(spaceObjects[planet].name == recentlyDiscovered[currentPlanet].name){
+                    index = planet;
+                }
+            }
+            $('#planetInfo').append('<span style="padding-bottom:1em;padding-right:1em;"><a style="" class="submit positive" onclick="showSpecificPlanet(recentlyDiscovered['+currentPlanet+'])">'+ recentlyDiscovered[currentPlanet].name+'</a></span>');
+        }
     }
 }
 
@@ -283,7 +300,7 @@ function loadNext(leftToLoad){
     if(leftToLoad>0){
         var loader = new THREE.ColladaLoader();
         loader.options.convertUpAxis = true;
-        loader.load( pathModels + spaceObjects[spaceObjects.length-leftToLoad].name + '.dae', function ( collada ) {
+        loader.load( pathModels + spaceObjects[spaceObjects.length-leftToLoad].name.toLowerCase() + '.dae', function ( collada ) {
             var dae = collada.scene;
             dae.scale.x = dae.scale.y = dae.scale.z = 2;
             dae.updateMatrix();
