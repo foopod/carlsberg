@@ -4,7 +4,7 @@
 	<head>
 		<title>Carlsberg</title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=500">
+		<meta name="viewport" content="width=500, user-scalable=0">
         <link rel="stylesheet" href="style.css">
         <link rel="icon" type="image/png" href="favicon.png" />
         <link href="assets/font/css/open-iconic.css" rel="stylesheet">
@@ -47,5 +47,12 @@
         <script src="assets/js/markdown.min.js"></script>
 		<script src="assets/js/Detector.js"></script>
         <script src="assets/js/app.js"></script>
+        <script>
+            //Set height on load for smaller devices to avoid mobile address bar issues
+            if(window.innerWidth<600){
+                var height = $('#planetDescriptor').css('top');
+                $('#planetDescriptor').css('top', height);
+            }
+        </script>
 	</body>
 </html>

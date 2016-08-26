@@ -230,8 +230,11 @@ function initCanvas() {
     }
     renderer.setClearColor(0x222222);
     container.appendChild(renderer.domElement);
-
-    window.addEventListener( 'resize', onWindowResize, false );
+    
+    //turn off resizing for smaller devices on load
+    if(window.innerWidth>=600){
+        window.addEventListener( 'resize', onWindowResize, false );
+    }
     
     //start loading models
     loadNext(spaceObjects.length); 
