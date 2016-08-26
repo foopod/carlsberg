@@ -54,7 +54,7 @@ var maxWidth = 1000;
 //Used to skip forward and backward through the planets
 function planetCycle(upward){
     if(onShip){
-        $('#shipSelector').html('<span class="oi" data-glyph="home"></span>');
+        $('#shipSelector').html('<span class="oi" data-glyph="dashboard"></span>');
     }
     
     if(upward){
@@ -77,28 +77,27 @@ function planetCycle(upward){
 }
 
 function unlockPlanet(code, component){
-    //Show planet tool tip
-//    $('#investigationInfo a').each(function() {
-        $(component).addClass("tooltip");
-        $(component).parent().append('<span class="tooltiptext" style="display:none;">New Co-Ordinates Obtained</span>');
-//        console.log($(this).position());
-        $('.tooltiptext').css('top', $(component).position().top-50);
-        $('.tooltiptext').fadeIn();
-        $(component).removeAttr("onclick");
-        setTimeout(function(){ 
-            $('.tooltiptext').each(function() {
-                 $(this).fadeOut();
-            });
-        }, 1400);
-//    });
+    $(component).addClass("tooltip");
+    $(component).parent().append('<span class="tooltiptext" style="display:none;">New Co-Ordinates Obtained</span>');
+    $('.tooltiptext').css('top', $(component).position().top-50);
+    $('.tooltiptext').fadeIn();
+    $(component).removeAttr("onclick");
+    setTimeout(function(){ 
+        $('.tooltiptext').each(function() {
+             $(this).fadeOut();
+        });
+    }, 1400);
     
     //remove unlock code to unlock
     for(planet in spaceObjects){
         if(spaceObjects[planet].unlockCode == code){
             spaceObjects[planet].unlockCode = '';
             recentlyDiscovered.push(spaceObjects[planet]);
-            return true;
         }
+    }
+    
+    if(recentlyDiscovered.length>0){
+        $('.navigation').show();
     }
 }
 
@@ -119,7 +118,7 @@ function showObject(model, isShip){
     if(isShip){
         $('#shipSelector').html('<span class="oi" data-glyph="globe"></span>');
     } else {
-        $('#shipSelector').html('<span class="oi" data-glyph="home"></span>');   
+        $('#shipSelector').html('<span class="oi" data-glyph="dashboard"></span>');   
     }
     
     //Getting markdown
@@ -155,10 +154,14 @@ function showObject(model, isShip){
         onShip= true;
         scene.add(ship);
         objectInScene = ship;
+        $('.navigation').hide();
     } else {
         onShip= false;
         scene.add(spaceObjects[planetIndex].model);
         objectInScene = spaceObjects[planetIndex].model;
+        if(recentlyDiscovered.length>0){
+            $('.navigation').show();
+        }
     }
     
     //Setting up two parter

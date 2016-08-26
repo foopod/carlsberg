@@ -1,8 +1,8 @@
 #Jupiter
 
-####Not really Jupiter, just looks a lot like it. No matter in gaseous states though, no atmosphere at all. The colours are all rock that form in these layers
+####It's not actually Jupiter, it just looks a lot like it. There is no gaseous matter though, no atmosphere at all. The coloured segments are all different metals arranged in such a way by the planets strong magnetic field.
 
-Morbi luctus nulla at felis cursus lacinia. Nulla facilisi. Nullam quis mauris auctor, varius enim laoreet, convallis sapien. Donec volutpat, nibh nec dictum volutpat, dolor felis fringilla mauris, nec dictum neque lacus non enim.
+I'm not even going to dare trying to land here. Some of the gear started going haywire when I entered the orbit.
 
 Vestibulum semper mi eget dictum pretium. Maecenas tempor pulvinar risus quis dignissim. Maecenas sodales ex quis diam tempus vehicula at nec sem. Sed a diam dolor. Nulla rutrum congue metus sit amet dictum. Nullam sodales imperdiet ante eu egestas. Nulla molestie lobortis eros, nec cursus purus placerat eu. Proin eget tempus enim, id scelerisque libero.
 
