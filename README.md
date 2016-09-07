@@ -17,3 +17,16 @@ Current Version can be viewed [here](http://carlsberg.jono.tech/).
 #Gameplay Ideas
 
 * Decipher hidden codes that give you coordinates to a new location, enter them to uncover new planets.
+
+#Planet Ideas
+
+* Planet of Salespeople.
+
+#Game Name Ideas
+
+* AIDS - An Intergalactic Diorama of Sorts
+* STD - Space Travellers Digest
+* BUTT - Beautiful Universe Travel Tours
+* GONORRHOREA - Graceful Open Non-Orphaned Readable Reasearched 
+* HIV - Helpful Index of 
+* HERPES - Helpful Encyclopedia of Regional Planetoids Endangered by Stars

@@ -19,32 +19,39 @@
         '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-PL8VM6');</script>
         <!-- End Google Tag Manager -->
+        
+        <div id="menu">
+            <h1>HERPES</h1>
+            <h6><b>H</b>elpful <b>E</b>ncyclopedia of <b>R</b>egional <b>P</b>lanetoids <b>E</b>ndangered by <b>S</b>tars</h6>
+        </div>
+<!--        <div id="submenu" style="display:none;">-->
         <div id="planetViewer" style="height:100%;display:none;position:fixed;">
         
         </div>
-        <div id="contentContainer">
+        <div id="contentContainer" style="display:none;">
             
             <div id="planetDescriptor" style="background-color:rgba(0,0,0,0.6);">
-                <h1 id="selectors" style="font-size:52px;">
-                    <a onclick="planetCycle(false)" style="position:absolute;top:0.75em;right:2.5em;display:none" class="navigation">
+                <h2 id="selectors" style="font-size:52px;">
+                    <a onclick="planetCycle(false)" style="position:absolute;top:0.75em;right:2.5em;" class="navigation">
                         <span class="oi" data-glyph="caret-left"></span>
                     </a>
-                    <a id="shipSelector" onclick="showObject(ship,true)" style="position:absolute;top:0.75em;right:1.5em" >
-                        <span class="oi" data-glyph="globe"></span>
+                    <a id="shipSelector" onclick="back()" style="position:absolute;top:0.75em;right:1.5em" >
+                        <span class="oi" data-glyph="arrow-thick-top"></span>
                     </a>
-                    <a onclick="planetCycle(true)" style="position:absolute;top:0.75em;right:.5em;display:none" class="navigation">
+                    <a onclick="planetCycle(true)" style="position:absolute;top:0.75em;right:.5em;" class="navigation">
                         <span class="oi" data-glyph="caret-right"></span>
                     </a>
-                </h1>
+                </h2>
                 <div id="planetInfo"></div>
             </div>
         </div>
-
+<!--            </div>-->
 		<script src="assets/js/three.min.js"></script>
 
 		<script src="assets/js/ColladaLoader.js"></script>
         <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
         <script src="assets/js/markdown.min.js"></script>
+        <script src="https://cdn.rawgit.com/showdownjs/showdown/1.4.3/dist/showdown.min.js"></script>
 		<script src="assets/js/Detector.js"></script>
         <script src="assets/js/app.js"></script>
         <script>
@@ -52,6 +59,20 @@
             if(window.innerWidth<600){
                 var height = $('#planetDescriptor').css('top');
                 $('#planetDescriptor').css('top', height);
+            }
+            
+            function back(){
+                $('#contentContainer').hide( "fast", function() {
+                    models = [];
+                    $('#menu').slideToggle("fast");
+                  });
+            }
+            
+            function toggle(system){
+                initPlanets(system);
+                $('#menu').slideToggle( "fast", function() {
+                        $('#contentContainer').show();
+                  });
             }
         </script>
 	</body>
