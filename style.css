@@ -58,9 +58,9 @@ th, td {
 }
 
 .systemHolder{
-    -webkit-columns: 3 300px;
-     -moz-columns: 3 300px;
-          columns: 3 3  00px;
+    -webkit-columns: 3 330px;
+     -moz-columns: 3 330px;
+          columns: 3 330px;
     -webkit-column-gap: 2em;
     -moz-column-gap: 2em;
     column-gap: 2em;

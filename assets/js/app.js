@@ -143,7 +143,7 @@ function initCanvas() {
 
     var pointLight = new THREE.PointLight( 0xffffff, 1.5 );
     particleLight.add( pointLight );
-    particleLight.position.x = -200;x
+    particleLight.position.x = -200;
     
     renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio( window.devicePixelRatio/1);
