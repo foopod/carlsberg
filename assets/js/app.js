@@ -11,7 +11,7 @@ var pathContent = 'md/';
 var dex = [
     {
         'name' : 'The Alexis System',
-        'planets' :['Canyon']
+        'planets' :['Canyon', 'Sentri']
     },{
         'name' : '8sJ0Dave',
         'planets' : ['Earth']
@@ -31,23 +31,6 @@ var dex = [
 ];
 
 var spaceObjects;
-//= [
-//    {
-//        'name':'Jupiter',
-//        'system':'Alexis'
-//    },
-//    {
-//        'name':'Canyon',
-//        'system':'Alexis'
-//    },
-//    {
-//        'name':'Planetz',
-//        'system':'Alexis'
-//    },
-//    {
-//        'name':'Earth',
-//        'system':'8sJ0Dave'
-//    }];
 var models = [];
 
 var planetIndex =1;
@@ -199,16 +182,19 @@ function render() {
         camera.position.x = Math.cos( 2 ) * camDistance;
         camera.position.y = 4;
         camera.position.z = Math.sin( 2 ) * camDistance;
-
-        camera.lookAt( scene.position );
-        models[planetIndex].rotation.y=.2* timer;
-        renderer.render( scene, camera );
         
         if(spaceObjects[planetIndex] == 'Eye'){
             particleLight.position.x = 0;
             particleLight.position.y = 200;
             particleLight.position.z = 0;
+            camera.position.y = 0;
         }
+
+        camera.lookAt( scene.position );
+        models[planetIndex].rotation.y=.2* timer;
+        renderer.render( scene, camera );
+        
+        
     }
 }
 
@@ -217,7 +203,7 @@ function loadNext(leftToLoad){
     if(leftToLoad>0){
         var loader = new THREE.ColladaLoader();
         loader.options.convertUpAxis = true;
-        loader.load( pathModels + spaceObjects[spaceObjects.length-leftToLoad].toLowerCase() + '.dae', function ( collada ) {
+        loader.load(pathModels + spaceObjects[spaceObjects.length-leftToLoad].toLowerCase() + '.dae', function ( collada ) {
             var dae = collada.scene;
             dae.scale.x = dae.scale.y = dae.scale.z = 2;
             dae.updateMatrix();

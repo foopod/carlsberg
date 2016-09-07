@@ -100,6 +100,16 @@ h1{
     margin-top: 0.5em;
 }
 
+h2{
+    font-size:  44px;
+/*
+    text-align: left;
+    line-height: 1.2em;
+    padding-bottom: 1em;
+    margin-top: 0.5em;
+*/
+}
+
 h4{
     color: skyblue;
 }
@@ -211,6 +221,7 @@ input[type=text],input[type=password], select {
     }
     
     h1{
+        text-align: center;
         font-size:  64px;
         padding: 0;
         margin-top: 0;

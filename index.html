@@ -69,6 +69,8 @@
             }
             
             function toggle(system){
+                spaceOjects = [];
+                models = [];
                 initPlanets(system);
                 $('#menu').slideToggle( "fast", function() {
                         $('#contentContainer').show();
