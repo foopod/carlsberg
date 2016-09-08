@@ -11,22 +11,28 @@ var pathContent = 'md/';
 var dex = [
     {
         'name' : 'The Alexis System',
-        'planets' :['Canyon']
+        'planets' :['Canyon'],
+        'models' : []
     },{
         'name' : '8sJ0Dave',
-        'planets' : ['Earth']
+        'planets' : ['Earth'],
+        'models' : []
     },{
         'name' : 'Ad Simon Sistema',
-        'planets' : ['Jupiter']
+        'planets' : ['Jupiter'],
+        'models' : []
     },{
         'name' : 'Uguba System',
-        'planets' : ['Sentri']
+        'planets' : ['Sentri'],
+        'models' : []
     },{
         'name' : 'DArv',
-        'planets' : ['Planetz']
+        'planets' : ['Planetz'],
+        'models' : []
     },{
         'name' : 'Solar Nexus',
-        'planets' : ['Eye']
+        'planets' : ['Eye'],
+        'models' : []
     }
 ];
 
@@ -69,8 +75,6 @@ function planetCycle(upward){
 
 function showObject(model){
     scene.remove(objectInScene);
-    
-    console.log(models);
     
     //Getting markdown
     var body_location = pathContent+spaceObjects[planetIndex].toLowerCase()+'.md';
@@ -165,9 +169,35 @@ function initPlanets(system){
     for(entry in dex){
         if(dex[entry].name == system){
             spaceObjects = dex[entry].planets;
+            models = dex[entry].models;
+            console.log(dex[entry].models);
+            showObject(dex[entry].models[0]);
+            if(!started){
+                animate();
+                started = true;
+            }
         }
     }
-    loadNext(spaceObjects.length); 
+    $('#planetViewer').show();
+}
+
+function loadAllPlanets(){
+    for(entry in dex){
+        console.log(entry);
+        for(planet in dex[entry].planets){
+            var loader = new THREE.ColladaLoader();
+            loader.options.convertUpAxis = true;
+            loader.load(pathModels+dex[entry].planets[planet].toLowerCase()+'.dae',function (collada, index) {
+                var dae = collada.scene;
+                dae.scale.x = dae.scale.y = dae.scale.z = 2;
+                dae.updateMatrix();
+                dex[this].models.push(dae);
+                console.log(1);
+                console.log(dex[this].planets);
+                planetIndex = 0;
+            }.bind(entry));
+        }
+    }
 }
 
 function animate() {
@@ -199,27 +229,27 @@ function render() {
 }
 
 //recursive model loader, loads next on finish of the previous
-function loadNext(leftToLoad){
-    if(leftToLoad>0){
-        var loader = new THREE.ColladaLoader();
-        loader.options.convertUpAxis = true;
-        loader.load(pathModels + spaceObjects[spaceObjects.length-leftToLoad].toLowerCase() + '.dae', function ( collada ) {
-            var dae = collada.scene;
-            dae.scale.x = dae.scale.y = dae.scale.z = 2;
-            dae.updateMatrix();
-            models.push(dae);
-            planetIndex = 0;
-            showObject(models[0]);
-            if(!started){
-                animate();
-                started = true;
-            }
-            loadNext(leftToLoad-1);
-        } );
-    } else {
-        $('#planetViewer').show();
-    }
-}
+//function loadNext(leftToLoad){
+//    if(leftToLoad>0){
+//        var loader = new THREE.ColladaLoader();
+//        loader.options.convertUpAxis = true;
+//        loader.load(pathModels + spaceObjects[spaceObjects.length-leftToLoad].toLowerCase() + '.dae', function ( collada ) {
+//            var dae = collada.scene;
+//            dae.scale.x = dae.scale.y = dae.scale.z = 2;
+//            dae.updateMatrix();
+//            models.push(dae);
+//            planetIndex = 0;
+//            showObject(models[0]);
+//            if(!started){
+//                animate();
+//                started = true;
+//            }
+//            loadNext(leftToLoad-1);
+//        } );
+//    } else {
+//        $('#planetViewer').show();
+//    }
+//}
 
 function init(){
     $('#menu').append('<div class="systemHolder">');
