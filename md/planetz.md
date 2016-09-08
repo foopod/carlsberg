@@ -1,4 +1,4 @@
-#Planet Z
+##Planet Z
 
 ####The pink is a weird thick goo that is life itself, not sentient. But basically like a weird living soup, it has tides that go in and out very quickly, almost like the goo is breathing.
 

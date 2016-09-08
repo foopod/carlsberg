@@ -24,7 +24,6 @@
             <h1>HERPES</h1>
             <h6><b>H</b>elpful <b>E</b>ncyclopedia of <b>R</b>egional <b>P</b>lanetoids <b>E</b>ndangered by <b>S</b>tars</h6>
         </div>
-<!--        <div id="submenu" style="display:none;">-->
         <div id="planetViewer" style="height:100%;display:none;position:fixed;">
         
         </div>
@@ -45,12 +44,10 @@
                 <div id="planetInfo"></div>
             </div>
         </div>
-<!--            </div>-->
 		<script src="assets/js/three.min.js"></script>
 
 		<script src="assets/js/ColladaLoader.js"></script>
         <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-        <script src="assets/js/markdown.min.js"></script>
         <script src="https://cdn.rawgit.com/showdownjs/showdown/1.4.3/dist/showdown.min.js"></script>
 		<script src="assets/js/Detector.js"></script>
         <script src="assets/js/app.js"></script>
@@ -61,14 +58,20 @@
                 $('#planetDescriptor').css('top', height);
             }
             
+            var clicks = 0;
+            
             function back(){
-                $('#contentContainer').hide( "fast", function() {
-                    models = [];
-                    $('#menu').slideToggle("fast");
-                  });
+                if(clicks < 1){
+                    $('#contentContainer').hide( "fast", function() {
+                        models = [];
+                        $('#menu').slideToggle("fast");
+                      });
+                    clicks++;
+                }
             }
             
             function toggle(system){
+                clicks = 0;
                 spaceOjects = [];
                 models = [];
                 initPlanets(system);

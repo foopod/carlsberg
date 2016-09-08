@@ -1,4 +1,4 @@
-#Jupiter
+##Jupiter
 
 ####It's not actually Jupiter, it just looks a lot like it. There is no gaseous matter though, no atmosphere at all. The coloured segments are all different metals arranged in such a way by the planets strong magnetic field.
 

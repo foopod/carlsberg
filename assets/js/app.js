@@ -11,7 +11,7 @@ var pathContent = 'md/';
 var dex = [
     {
         'name' : 'The Alexis System',
-        'planets' :['Canyon', 'Sentri']
+        'planets' :['Canyon']
     },{
         'name' : '8sJ0Dave',
         'planets' : ['Earth']
@@ -20,7 +20,7 @@ var dex = [
         'planets' : ['Jupiter']
     },{
         'name' : 'Uguba System',
-        'planets' : []
+        'planets' : ['Sentri']
     },{
         'name' : 'DArv',
         'planets' : ['Planetz']
@@ -129,7 +129,7 @@ function initCanvas() {
     particleLight.position.x = -200;
     
     renderer = new THREE.WebGLRenderer();
-    renderer.setPixelRatio( window.devicePixelRatio/1);
+    renderer.setPixelRatio( window.devicePixelRatio/8);
     if(window.innerWidth<maxWidth){
         renderer.setSize( window.innerWidth, window.innerHeight/2 );
         camDistance = 4;
@@ -188,12 +188,12 @@ function render() {
             particleLight.position.y = 200;
             particleLight.position.z = 0;
             camera.position.y = 0;
+            camera.position.x = 4;
         }
 
         camera.lookAt( scene.position );
         models[planetIndex].rotation.y=.2* timer;
         renderer.render( scene, camera );
-        
         
     }
 }
@@ -224,7 +224,6 @@ function loadNext(leftToLoad){
 function init(){
     $('#menu').append('<div class="systemHolder">');
     for(entry in dex){
-         
         $('.systemHolder').append('<div class="system" onclick="toggle(\''+dex[entry].name+'\')">'+
           '<canvas style="image-rendering:pixelated;width:100px;height:100px;" width="8" height="8" id="'+ dex[entry].name +'"/><br><br>' + dex[entry].name + '</div>');
         makeImage(dex[entry].name);
