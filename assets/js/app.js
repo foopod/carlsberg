@@ -11,7 +11,7 @@ var pathContent = 'md/';
 var dex = [
     {
         'name' : 'The Alexis System',
-        'planets' :['Canyon'],
+        'planets' :['Canyon', 'Sentri'],
         'models' : []
     },{
         'name' : '8sJ0Dave',
@@ -19,11 +19,11 @@ var dex = [
         'models' : []
     },{
         'name' : 'Ad Simon Sistema',
-        'planets' : ['Jupiter'],
+        'planets' : ['Joe'],
         'models' : []
     },{
         'name' : 'Uguba System',
-        'planets' : ['Sentri'],
+        'planets' : ['Jupiter'],
         'models' : []
     },{
         'name' : 'DArv',

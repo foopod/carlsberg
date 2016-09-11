@@ -56,6 +56,7 @@
 		<script src="assets/js/Detector.js"></script>
         <script src="assets/js/app.js"></script>
         <script>
+            var UIDisabled = false;
             //Set height on load for smaller devices to avoid mobile address bar issues
             if(window.innerWidth<600){
                 var height = $('#planetDescriptor').css('top');
@@ -64,22 +65,31 @@
             
             var clicks = 0;
             loadAllPlanets();
+            
             function back(){
-                if(clicks < 1){
-                    $('#contentContainer').hide( "fast", function() {
-                        models = [];
-                        $('#menu').slideToggle("slow");
-                      });
-                    clicks++;
+                if(!UIDisabled){
+                    UIDisabled = true;
+                    if(clicks < 1){
+                        $('#contentContainer').hide( "fast", function() {
+                            models = [];
+                            $('#menu').slideToggle("slow");
+                            UIDisabled = false;
+                          });
+                        clicks++;
+                    }
                 }
             }
             
             function toggle(system){
-                clicks = 0;
-                initPlanets(system);
-                $('#menu').slideToggle( "slow", function() {
-                        $('#contentContainer').show();
-                  });
+                if(!UIDisabled){
+                    UIDisabled = true;
+                    clicks = 0;
+                    initPlanets(system);
+                    $('#menu').slideToggle( "slow", function() {
+                            $('#contentContainer').show();
+                            UIDisabled = false;
+                      });
+                }
             }
         </script>
 	</body>
